@@ -44,7 +44,7 @@ export default function Basket() {
             {state.basket.map(
               (product) => (
                 (<BasketItem key={product.id} {...product} />),
-                alert(product.id.toLocaleString() +" Quantity "+ product.count.toLocaleString()),
+                
 
                 pusher.items.push(product.id.toLocaleString()),
                 pusher.items.push(product.count.toLocaleString())
@@ -100,15 +100,15 @@ export default function Basket() {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude,
                       };
-                      alert(
+                      // alert(
 
-                        "lat " +
-                          pos.lat +
-                          " lng" +
-                          pos.lng +
-                          "totla price :" +
-                          state.totalPrice.toLocaleString()
-                      );
+                      //   "lat " +
+                      //     pos.lat +
+                      //     " lng" +
+                      //     pos.lng +
+                      //     "totla price :" +
+                      //     state.totalPrice.toLocaleString()
+                      // );
                       pusher.lng=pos.lng;
                       pusher.lat=pos.lat;
                       //done this works
