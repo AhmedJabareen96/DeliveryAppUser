@@ -1,32 +1,37 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
 import styles from './Login.module.css';
-import {UserContext} from "../../UserContext";
-import { useNavigate} from "react-router-dom";
+import { UserContext } from "../../UserContext";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-    const navigate = useNavigate()
-    const { username, setUsername} = useContext(UserContext);
-    const [password, setPassword] = useState()
+    const navigate = useNavigate();
+    const { username, setUsername } = useContext(UserContext);
+    const [password, setPassword] = useState();
+    const [errorMessage, setErrorMessage] = useState('');
+
     function handleLoginButton() {
-        axios.post("http://localhost:5000/users/loginEmail",{
+        axios.post("http://localhost:5000/users/loginEmail", {
             email: username,
             password: password
-        }).then(() =>{
-            console.log(`Hello ${username}`)
-            navigate('/')
-        }).catch(err=>{
-            console.log(err)
-        })
+        }).then(() => {
+            console.log(`Hello ${username}`);
+            navigate('/');
+        }).catch(err => {
+            console.log(err);
+            setUsername("");
+            setErrorMessage('Invalid email/password');
+        });
     }
 
     function handleUsernameChange(event) {
-        setUsername(event.target.value)
+        setUsername(event.target.value);
     }
-    function handlePasswordChange(event){
-        setPassword(event.target.value)
+
+    function handlePasswordChange(event) {
+        setPassword(event.target.value);
     }
 
     return (
@@ -36,10 +41,10 @@ const Login = () => {
                 <p>Shopping made easier!</p>
                 <TextField
                     id="loginm-username"
-                    label="Username"
+                    label="Email"
                     variant="standard"
                     className={styles['text-field']}
-                    onChange= {handleUsernameChange}
+                    onChange={handleUsernameChange}
                 />
                 <TextField
                     id="loginm-password"
@@ -47,11 +52,12 @@ const Login = () => {
                     variant="standard"
                     type="password"
                     className={styles['password-field']}
-                    onChange = {handlePasswordChange}
+                    onChange={handlePasswordChange}
                 />
-                <Button variant="contained" className={styles['button']} onClick = {handleLoginButton}>
+                <Button variant="contained" className={styles['button']} onClick={handleLoginButton}>
                     Login
                 </Button>
+                {errorMessage && <div className={styles['error-message']}>{errorMessage}</div>}
                 <p>
                     Forgot your password? <Link to="/forgot-password">Reset here</Link>
                 </p>
@@ -60,7 +66,7 @@ const Login = () => {
                 </p>
             </div>
         </div>
-    );
+        );
 };
 
 export default Login;
