@@ -5,10 +5,10 @@ import { BsFillBookmarkHeartFill } from "react-icons/bs";
 import { ProductContext, ProductDispath } from "../Context/ContextProvider";
 import { Link, useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
-import {UserContext} from "../../UserContext";
+import { UserContext } from "../../UserContext";
 
 function Header() {
-  const { username, setUsername} = useContext(UserContext);
+  const { username, setUsername } = useContext(UserContext);
   const { state } = useContext(ProductContext);
   const { dispath } = useContext(ProductDispath);
   // Get location for hide & show SearchBar Component
@@ -27,33 +27,52 @@ function Header() {
     }
   }, [dispath, state.favorites]);
 
+  // Handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    setUsername(null);
+  };
+
   return (
     <header className="header">
       <nav className="nav">
         <Link to={"/"} className="logo">
-          Welcome to hourly {localStorage.getItem("username")}
+          {username ? `Welcome to hourly ${username}` : ""}
         </Link>
-        <div className="search_header">{pathname === "/" && <SearchBar />}</div>
-        <div className="icon_Sopping_box">
-          <Link to={"/basket"} className="shoppe_icon_box">
-            <AiOutlineShopping className="shop_icon" />
-            {state.basket.length > 0 && (
-              <span className="badge_shope">{state.basket.length}</span>
-            )}
+        {username ? (
+          <>
+            <div className="search_header">
+              {pathname === "/" && <SearchBar />}
+            </div>
+            <div className="icon_Sopping_box">
+              <Link to={"/basket"} className="shoppe_icon_box">
+                <AiOutlineShopping className="shop_icon" />
+                {state.basket.length > 0 && (
+                  <span className="badge_shope">{state.basket.length}</span>
+                )}
+              </Link>
+              <Link
+                to={"/favorite"}
+                className={`mark_icon_box ${state.isFavorite ? "tada" : ""}`}
+              >
+                <BsFillBookmarkHeartFill className="mark_icon" />
+                {state.favorites.length > 0 && (
+                  <span className="badge_mark">{state.favorites.length}</span>
+                )}
+              </Link>
+            </div>
+            <button className="logout_button" onClick={handleLogout}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link to="/login" className="login_button">
+            Login
           </Link>
-          <Link
-            to={"/favorite"}
-            className={`mark_icon_box ${state.isFavorite ? "tada" : ""}`}
-          >
-            <BsFillBookmarkHeartFill className="mark_icon" />
-            {state.favorites.length > 0 && (
-              <span className="badge_mark">{state.favorites.length}</span>
-            )}
-          </Link>
-        </div>
+        )}
       </nav>
     </header>
-  );
+    );
 }
 
 export default Header;

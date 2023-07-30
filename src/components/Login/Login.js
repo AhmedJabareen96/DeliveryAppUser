@@ -18,6 +18,7 @@ const Login = () => {
             password: password
         }).then(() => {
             console.log(`Hello ${username}`);
+            setUsername(username);
             localStorage.setItem("username",username);
             navigate('/');
         }).catch(err => {
