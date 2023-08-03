@@ -65,7 +65,7 @@ export default function Basket() {
           <div className="basket_priceBox">
             <OfferBadge />
             <div className="basket_price">
-              <span>overall</span>
+              <span>Overall products</span>
               <span>|</span>
               <span>{state.totalPrice.toLocaleString()} shekels</span>
             </div>
@@ -75,7 +75,7 @@ export default function Basket() {
                 <span>
 
                   { //here for adding to the list
-                  pusher.totalPrice=state.totalPriceAfterOffer.toLocaleString()} shekels
+                  pusher.totalPrice=state.totalPriceAfterOffer} shekels
 
                 </span>
               </div>
@@ -83,8 +83,8 @@ export default function Basket() {
             <Offer />
             <SendProducts />
             <div className="basket_send">
-              <span> overall</span>
-              <span>{state.totalPriceFainal.toLocaleString()} shekels</span>
+              <span> Products plus Delivery</span>
+             <span>{pusher.totalPrice=parseInt(state.totalPriceFainal.toLocaleString())} shekels</span>
             </div>
             <button
               className="basket_button_buy"
@@ -130,6 +130,7 @@ export default function Basket() {
                         totalPrice: pusher.totalPrice
                       })
                           .then(res => {
+                            console.log("total price is : " + pusher.totalPrice)
                             console.log("Item has been added!")
                           })
                           .catch(err => {
