@@ -164,7 +164,7 @@ const RegisterPage = () => {
         >
           Register
         </Button>
-        <Link to="/login" className={styles['link']}>
+        <Link to="/" className={styles['link']}>
           Go to home page
         </Link>
       </div>
