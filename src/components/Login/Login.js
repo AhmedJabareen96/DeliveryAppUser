@@ -20,7 +20,7 @@ const Login = () => {
             console.log(`Hello ${username}`);
             setUsername(username);
             localStorage.setItem("username",username);
-            navigate('/');
+            navigate('/home');
         }).catch(err => {
             console.log(err);
             setUsername("");

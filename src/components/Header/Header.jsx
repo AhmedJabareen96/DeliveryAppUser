@@ -6,6 +6,7 @@ import { ProductContext, ProductDispath } from "../Context/ContextProvider";
 import { Link, useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import { UserContext } from "../../UserContext";
+import {useNavigate} from "react-router-dom";
 
 function Header() {
   const { username, setUsername } = useContext(UserContext);
@@ -14,7 +15,7 @@ function Header() {
   // Get location for hide & show SearchBar Component
   const location = useLocation();
   const { pathname } = location;
-
+  const nav = useNavigate();
   // run only if state changes and Not Mount
   const didMount = useRef(false);
   useEffect(() => {
@@ -30,6 +31,7 @@ function Header() {
   // Handle logout
   const handleLogout = () => {
     localStorage.removeItem("username");
+    nav('/');
     setUsername(null);
   };
 
