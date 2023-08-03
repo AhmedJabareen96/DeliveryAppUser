@@ -113,13 +113,14 @@ export default function Basket() {
                       pusher.lat=pos.lat;
                       //done this works
                       // you can use post to get location
-                      console.log({
-                        items: pusher.items,
-                        lat: pusher.lat,
-                        lng: pusher.lng,
-                        id: pusher.id,
-                        totalPrice: pusher.totalPrice
-                      })
+                      // console.log({
+                      //   items: pusher.items,
+                      //   lat: pusher.lat,
+                      //   lng: pusher.lng,
+                      //   id: pusher.id,
+                      //   totalPrice: pusher.totalPrice
+                      // })
+                      //console.log(localStorage.getItem("username"))
                       axios.post("http://localhost:5000/baskets/addDelivery", {
                         username: username,
                         items: pusher.items,

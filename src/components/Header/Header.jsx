@@ -33,6 +33,21 @@ function Header() {
     setUsername(null);
   };
 
+
+
+  const logoutButtonStyle = {
+    backgroundColor: "#4CAF50", 
+    color: "white",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize: "16px",
+    fontWeight: "bold",
+    marginLeft: "20px",
+  };
+
+
   return (
     <header className="header">
       <nav className="nav">
@@ -61,7 +76,7 @@ function Header() {
                 )}
               </Link>
             </div>
-            <button className="logout_button" onClick={handleLogout}>
+            <button style={logoutButtonStyle} className="logout_button" onClick={handleLogout}>
               Logout
             </button>
           </>
