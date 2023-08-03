@@ -16,8 +16,8 @@ import PostRegister from "./components/PostRegister/PostRegister";
 
 function App() {
   let router = useRoutes([
-    { path: '/', element: <Login /> },
-    { path: '/home', element: <Products /> },
+    { path: '/', element: <Products /> },
+    { path: '/login', element: <Login /> },
     { path: '/register', element: <RegisterPage /> },
     { path: '/:id', element: <Details /> },
     { path: '/favorite', element: <FavoritePage /> },

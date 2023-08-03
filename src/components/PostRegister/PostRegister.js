@@ -9,7 +9,7 @@ const PostRegister = () => {
                 <div className={styles['message']}>
                     Thank you for registering for the service!
                 </div>
-                <Link to="/" className={styles['link']}>
+                <Link to="/login" className={styles['link']}>
                     Go back to home page
                 </Link>
             </div>

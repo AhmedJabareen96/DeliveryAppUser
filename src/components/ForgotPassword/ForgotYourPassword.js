@@ -24,7 +24,7 @@ const ForgotYourPassword = () => {
                         Submit
                     </Button>
                     <div className={styles['link']}>
-                        <Link to="/">Return to home page</Link>
+                        <Link to="/login">Return to home page</Link>
                     </div>
                 </form>
             </div>

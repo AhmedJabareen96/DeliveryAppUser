@@ -66,7 +66,7 @@ function Header() {
             </button>
           </>
         ) : (
-          <Link to="/" className="login_button">
+          <Link to="/login" className="login_button">
             Login
           </Link>
         )}
