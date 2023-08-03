@@ -83,7 +83,7 @@ export default function Basket() {
             <Offer />
             <SendProducts />
             <div className="basket_send">
-              <span> Products plus Delivery</span>
+              <span> Products + delivery</span>
              <span>{pusher.totalPrice=parseInt(state.totalPriceFainal.toLocaleString())} shekels</span>
             </div>
             <button
