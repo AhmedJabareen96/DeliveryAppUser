@@ -48,13 +48,15 @@ function Header() {
   };
 
 
+   const isUserLoggedIn = localStorage.getItem("username") !== null;
+
   return (
     <header className="header">
       <nav className="nav">
         <Link to={"/"} className="logo">
-          {username ? `Welcome to hourly` : ""}
+          {isUserLoggedIn ? `Welcome to Hourly` : ""}
         </Link>
-        {username ? (
+        {isUserLoggedIn ? (
           <>
             <div className="search_header">
               {pathname === "/" && <SearchBar />}
@@ -87,7 +89,7 @@ function Header() {
         )}
       </nav>
     </header>
-    );
+  );
 }
 
 export default Header;
