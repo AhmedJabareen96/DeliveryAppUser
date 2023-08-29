@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 import styles from './Login.module.css';
 import { UserContext } from "../../UserContext";
@@ -9,32 +9,35 @@ import axios from "axios";
 const Login = () => {
     const navigate = useNavigate();
     const { username, setUsername } = useContext(UserContext);
-    const [password, setPassword] = useState();
-    const [errorMessage, setErrorMessage] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    function handleLoginButton() {
+    const handleLoginButton = () => {
+        setLoading(true);
+        setError(null);
+
         axios.post("http://localhost:5000/users/loginEmail", {
             email: username,
             password: password
         }).then(() => {
-            console.log(`Hello ${username}`);
+            setLoading(false);
             setUsername(username);
-            localStorage.setItem("username",username);
+            localStorage.setItem("username", username);
             navigate('/');
         }).catch(err => {
-            console.log(err);
-            setUsername("");
-            setErrorMessage('Invalid email/password');
+            setLoading(false);
+            setError('Invalid email/password');
         });
-    }
+    };
 
-    function handleUsernameChange(event) {
+    const handleUsernameChange = (event) => {
         setUsername(event.target.value);
-    }
+    };
 
-    function handlePasswordChange(event) {
+    const handlePasswordChange = (event) => {
         setPassword(event.target.value);
-    }
+    };
 
     return (
         <div className={styles['login-form-wrapper']}>
@@ -56,10 +59,15 @@ const Login = () => {
                     className={styles['password-field']}
                     onChange={handlePasswordChange}
                 />
-                <Button variant="contained" className={styles['button']} onClick={handleLoginButton}>
-                    Login
+                <Button
+                    variant="contained"
+                    className={styles['button']}
+                    onClick={handleLoginButton}
+                    disabled={loading}
+                >
+                    {loading ? <CircularProgress size={24} /> : 'Login'}
                 </Button>
-                {errorMessage && <div className={styles['error-message']}>{errorMessage}</div>}
+                {error && <div className={styles['error-message']}>{error}</div>}
                 <p>
                     Forgot your password? <Link to="/forgot-password">Reset here</Link>
                 </p>
@@ -68,7 +76,7 @@ const Login = () => {
                 </p>
             </div>
         </div>
-        );
+    );
 };
 
 export default Login;

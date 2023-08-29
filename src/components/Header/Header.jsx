@@ -52,7 +52,7 @@ function Header() {
     <header className="header">
       <nav className="nav">
         <Link to={"/"} className="logo">
-          {username ? `Welcome to hourly ${username}` : ""}
+          {username ? `Welcome to hourly` : ""}
         </Link>
         {username ? (
           <>
